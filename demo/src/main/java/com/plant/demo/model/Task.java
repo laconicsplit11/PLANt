@@ -55,7 +55,7 @@ public class Task {
         return this.timeOfTask;
     }
 
-    public void setTimeOfTask(LocalTime TimeOfTask) {
+    public void setTimeOfTask(LocalTime timeOfTask) {
         this.timeOfTask = timeOfTask;
     }
 
