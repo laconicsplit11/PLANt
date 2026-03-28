@@ -17,6 +17,10 @@ public class Task {
     private LocalDate dateOfTask;
     private LocalTime timeOfTask;
 
+    @ManyToOne
+    @JoinColumn(name = "week_id")
+    private Week week;
+
     public Long getTaskId() {
         return this.id;
     }

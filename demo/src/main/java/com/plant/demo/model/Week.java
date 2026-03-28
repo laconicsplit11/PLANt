@@ -2,6 +2,7 @@ package com.plant.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "weeks")
@@ -14,6 +15,9 @@ public class Week {
     private int weekNumber;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
     public Week() {
 
@@ -35,6 +39,10 @@ public class Week {
 
     public int getWeekNumber() {
         return this.weekNumber;
+    }
+
+    public void setWeekNumber(int weekNumber) {
+        this.weekNumber = weekNumber;
     }
 
     public LocalDate getStartDate() {
