@@ -1,22 +1,28 @@
 package com.plant.demo.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity
+@Table(name = "tasks")
 public class Task {
-    private long Id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String taskName;
     private String taskBody;
     private String dayOfTask;
     private LocalDate dateOfTask;
     private LocalTime timeOfTask;
 
-    public long getTaskId() {
-        return this.Id;
+    public Long getTaskId() {
+        return this.id;
     }
 
-    public void setTaskId(long Id) {
-        this.Id = Id;
+    public void setTaskId(Long id) {
+        this.id = id;
     }
 
     public String getTaskName() {

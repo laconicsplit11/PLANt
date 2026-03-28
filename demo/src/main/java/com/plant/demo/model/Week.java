@@ -1,19 +1,36 @@
 package com.plant.demo.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "weeks")
 public class Week {
-    long Id;
-    int weekNumber;
-    LocalDate startDate;
-    LocalDate endDate;
 
-    public long getTaskId() {
-        return this.Id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int weekNumber;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    public Week() {
+
+    }
+    
+    public Week(int weekNumber, LocalDate startDate, LocalDate endDate) {
+        this.weekNumber = weekNumber;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public void setTaskId(long Id) {
-        this.Id = Id;
+    public Long getWeekId() {
+        return this.id;
+    }
+
+    public void setWeekId(Long id) {
+        this.id = id;
     }
 
     public int getWeekNumber() {
