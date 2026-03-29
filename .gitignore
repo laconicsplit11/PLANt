@@ -23,7 +23,7 @@
 hs_err_pid*
 replay_pid*
 
-src/main/resources/local_application.properties
+**/local_application.properties
 .env
 HELP.md
 target/
