@@ -2,6 +2,7 @@ package com.plant.demo.service;
 
 import org.springframework.stereotype.Service;
 import com.plant.demo.model.Week;
+import com.plant.demo.model.Task;
 import com.plant.demo.repository.WeekRepository;
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class WeekService {
 
     private final WeekRepository weekRepository;
+    private final TaskService taskService;
 
-    public WeekService(WeekRepository weekRepository) {
+    public WeekService(WeekRepository weekRepository, TaskService taskService) {
         this.weekRepository = weekRepository;
+        this.taskService = taskService;
     }
 
     public List<Week> getAllWeeks() { 
@@ -40,9 +43,11 @@ public class WeekService {
         weekRepository.deleteById(id); 
     }
 
-    public List<com.plant.demo.model.Task> getTasksForWeek(Long weekId) {
-        Week week = weekRepository.findById(weekId)
-                .orElseThrow(() -> new RuntimeException("Week not found with id " + weekId));
-        return week.getTasks();
+    public List<Task> getTasksForWeek(Long weekId) {
+    if (!weekRepository.existsById(weekId)) {
+        throw new RuntimeException("Week not found with id " + weekId);
     }
+
+    return taskService.getTasksByWeekSorted(weekId);
+}
 }

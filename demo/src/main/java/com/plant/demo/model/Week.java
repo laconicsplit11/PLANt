@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "weeks")
 public class Week {
@@ -16,7 +18,8 @@ public class Week {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "week", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "week", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
     public Week() {
@@ -59,5 +62,13 @@ public class Week {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+    
+    public List<Task> getTasks() { 
+        return this.tasks; 
+    }
+
+    public void setTasks(List<Task> tasks) { 
+        this.tasks = tasks;
     }
 }

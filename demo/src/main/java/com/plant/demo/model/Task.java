@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -16,7 +18,9 @@ public class Task {
     private String dayOfTask;
     private LocalDate dateOfTask;
     private LocalTime timeOfTask;
+    private LocalTime endTimeOfTask;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "week_id")
     private Week week;
@@ -67,6 +71,22 @@ public class Task {
 
     public void setTimeOfTask(LocalTime timeOfTask) {
         this.timeOfTask = timeOfTask;
+    }
+
+    public LocalTime getEndTimeOfTask() {
+        return this.endTimeOfTask;
+    }
+
+    public void setEndTimeOfTask(LocalTime endTimeOfTask) {
+        this.endTimeOfTask = endTimeOfTask;
+    }
+
+    public Week getWeek() {
+        return this.week;
+    }
+
+    public void setWeek(Week week) {
+        this.week = week;
     }
 
 }
